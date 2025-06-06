@@ -231,3 +231,14 @@ ALTER TABLE pagos
 ADD CONSTRAINT fk_hc
 FOREIGN KEY (id_hc) REFERENCES historias_clinicas(id_hc);
 
+ALTER TABLE turnos
+ADD CONSTRAINT fk_pac
+FOREIGN KEY (id_pac) REFERENCES pacientes(id_pac);
+
+ALTER TABLE turnos
+ADD CONSTRAINT fk_odon
+FOREIGN KEY (id_odon) REFERENCES odontologos(id_odon);
+
+ALTER TABLE turnos
+ADD CONSTRAINT fk_emp
+FOREIGN KEY (id_emp) REFERENCES empleados(id_emp);
