@@ -44,22 +44,26 @@ desc_hc VARCHAR(100),
 finalizado BOOLEAN,
 pagado BOOLEAN,
 fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-fecha_fin DATE);
+fecha_fin DATE,
+CONSTRAINT pk_hc PRIMARY KEY(id_hc));
 
 CREATE TABLE trat_pd_cd (
 id_trat_pd_cd INT AUTO_INCREMENT,
 id_trat INT NOT NULL,
 id_cd INT NOT NULL,
 id_pd INT NOT NULL,
-id_hc INT NOT NULL);
+id_hc INT NOT NULL,
+CONSTRAINT pk_trat_pd_cd PRIMARY KEY(id_trat_pd_cd));
 
 CREATE TABLE entregas (
 id_entrega INT AUTO_INCREMENT,
-nom_entrega VARCHAR(20) NOT NULL);
+nom_entrega VARCHAR(20) NOT NULL,
+CONSTRAINT pk_entregas PRIMARY KEY(id_entrega));
 
 CREATE TABLE cuotas (
 id_cuota INT AUTO_INCREMENT,
-nom_cuota VARCHAR(20));
+nom_cuota VARCHAR(20),
+CONSTRAINT pk_cuotas PRIMARY KEY(id_cuota));
 
 CREATE TABLE pagos (
 id_pago INT AUTO_INCREMENT,
@@ -67,7 +71,8 @@ id_cuota INT,
 id_entrega INT,
 pagado BOOLEAN,
 fecha_limite DATE,
-fecha_pago DATETIME);
+fecha_pago DATETIME,
+CONSTRAINT pk_pagos PRIMARY KEY(id_pago));
 
 -- AGREGANDO CONSTRAINT A LAS TABLAS CON FORANEAS
 ALTER TABLE odon_esp 
