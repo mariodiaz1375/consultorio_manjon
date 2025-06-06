@@ -61,6 +61,7 @@ CREATE TABLE analisis_funcionales(
     CONSTRAINT pk_af PRIMARY KEY(id_af)
 );
 
+
 CREATE TABLE af_pacientes(
 	id_af_pac INT AUTO_INCREMENT,
     id_pac INT NOT NULL,
@@ -104,6 +105,14 @@ id_odonxesp INT AUTO_INCREMENT,
 id_odon INT NOT NULL,
 id_esp INT NOT NULL,
 CONSTRAINT pk_odonxesp PRIMARY KEY(id_odonxesp));
+
+CREATE TABLE turnos (
+id_turno INT AUTO_INCREMENT,
+id_pac INT NOT NULL,
+id_odon INT NOT NULL,
+id_emp INT NOT NULL,
+fecha_turno TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT pk_turno PRIMARY KEY(id_turno));
 
 CREATE TABLE piezas_dentales (
 id_pieza INT AUTO_INCREMENT,
@@ -151,8 +160,9 @@ CONSTRAINT pk_cuotas PRIMARY KEY(id_cuota));
 
 CREATE TABLE pagos (
 id_pago INT AUTO_INCREMENT,
-id_cuota INT,
-id_entrega INT,
+id_cuota INT NOT NULL,
+id_entrega INT NOT NULL,
+id_hc INT NOT NULL,
 pagado BOOLEAN,
 fecha_limite DATE,
 fecha_pago DATETIME,
@@ -216,4 +226,8 @@ FOREIGN KEY (id_cuota) REFERENCES cuotas(id_cuota);
 ALTER TABLE pagos
 ADD CONSTRAINT fk_entrega
 FOREIGN KEY (id_entrega) REFERENCES entregas(id_entrega);
+
+ALTER TABLE pagos
+ADD CONSTRAINT fk_hc
+FOREIGN KEY (id_hc) REFERENCES historias_clinicas(id_hc);
 
