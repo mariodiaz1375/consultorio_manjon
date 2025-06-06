@@ -1,4 +1,89 @@
+DROP SCHEMA IF EXISTS consultor_manjon;
+CREATE SCHEMA consultorio_manjon;
 USE consultorio_manjon;
+
+CREATE TABLE puestos(
+	id_puesto INT AUTO_INCREMENT,
+    nombre_puesto VARCHAR(20) NOT NULL,
+    CONSTRAINT pk_puestos PRIMARY KEY(id_cat)
+);
+
+CREATE TABLE empleados(
+	id_emp INT AUTO_INCREMENT,
+    id_puesto INT NOT NULL,
+    nom_emp VARCHAR(50) NOT NULL,
+    ape_emp VARCHAR(50) NOT NULL,
+    dni_emp VARCHAR(12) NOT NULL,
+    fec_nac_emp DATE,
+    dom_emp VARCHAR(50) NOT NULL,
+    tel_emmp VARCHAR(40) NOT NULL,
+    email_emp VARCHAR(50),
+    CONSTRAINT pk_emp PRIMARY KEY(id_emp)
+);
+
+CREATE TABLE empleados_puestos(
+	id_emp_puesto INT AUTO_INCREMENT,
+	id_emp INT NOT NULL,
+    id_puesto INT NOT NULL,
+    CONSTRAINT pk_empleados_puestos PRIMARY KEY(id_emp_puesto)
+);
+
+CREATE TABLE obras_sociales(
+	id_os INT AUTO_INCREMENT,
+    nombre_os VARCHAR(20) NOT NULL,
+    CONSTRAINT pk_puestos PRIMARY KEY(id_cat)
+);
+
+CREATE TABLE pacientes(
+	id_pac INT AUTO_INCREMENT,
+    nom_pac VARCHAR(50) NOT NULL,
+    ape_pac VARCHAR(50) NOT NULL,
+    dni_pac VARCHAR(12) NOT NULL,
+    fec_nac_pac DATE,
+    dom_pac VARCHAR(50) NOT NULL,
+    tel_pac VARCHAR(40) NOT NULL,
+    email_pac VARCHAR(50),
+    CONSTRAINT pk_pac PRIMARY KEY(id_pac)
+);
+
+CREATE TABLE os_pacientes(
+	id_os INT AUTO_INCREMENT,
+    id_pac INT NOT NULL,
+    id_os INT NOT NULL,
+    titular_os VARCHAR(50) NOT NULL,
+    dni_titular_os VARCHAR(12) NOT NULL,
+    CONSTRAINT pk_os_pac PRIMARY KEY(id_os_pac)
+);
+
+CREATE TABLE analisis_funcionales(
+	id_af INT AUTO_INCREMENT,
+    nombre_af VARCHAR(20) NOT NULL,
+    descripcion_af VARCHAR(100),
+    CONSTRAINT pk_af PRIMARY KEY(id_af)
+);
+
+CREATE TABLE af_pacientes(
+	id_af_pac INT AUTO_INCREMENT,
+    id_pac INT NOT NULL,
+    id_af INT NOT NULL,
+    descripcion_af VARCHAR(100),
+    CONSTRAINT pk_af_pac PRIMARY KEY(id_af_pac)
+);
+
+CREATE TABLE antecedentes(
+	id_ant INT AUTO_INCREMENT,
+    nom_ant VARCHAR(20) NOT NULL,
+    descripcion_ant VARCHAR(100),
+    CONSTRAINT pk_ant PRIMARY KEY(id_ant)
+);
+
+CREATE TABLE ant_pac(
+	id_ant_pac INT AUTO_INCREMENT,
+	id_ant INT NOT NULL,
+    id_pac INT NOT NULL,
+    descripcion_ant_pac VARCHAR(100),
+    CONSTRAINT pk_ant_pac PRIMARY KEY(id_ant_pac)
+);
 
 CREATE TABLE especialidades (
 id_esp INT AUTO_INCREMENT,
@@ -75,6 +160,30 @@ fecha_pago DATETIME,
 CONSTRAINT pk_pagos PRIMARY KEY(id_pago));
 
 -- AGREGANDO CONSTRAINT A LAS TABLAS CON FORANEAS
+
+ALTER TABLE empleados ADD CONSTRAINT fk_empleados_puestos
+	FOREIGN KEY (id_puestos) REFERENCES puestos (id_puestos);
+
+ALTER TABLE empleados_puestos ADD CONSTRAINT fk_exp_emp
+	FOREIGN KEY (id_emp) REFERENCES empleados (id_emp);
+ALTER TABLE empleados_puestos ADD CONSTRAINT fk_exp_puesto
+	FOREIGN KEY (id_puesto) REFERENCES puestos (id_puesto);
+    
+ALTER TABLE os_pacientes ADD CONSTRAINT fk_osxpac_os
+	FOREIGN KEY (id_os) REFERENCES obras_sociales (id_os);
+ALTER TABLE os_pacientes ADD CONSTRAINT fk_oscpac_pac
+	FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac);
+    
+ALTER TABLE af_pacientes ADD CONSTRAINT fk_afxpac_pac
+	FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac);
+ALTER TABLE af_pacientes ADD CONSTRAINT fk_afxpac_af
+	FOREIGN KEY (id_af) REFERENCES analisis_funcionales (id_af);
+    
+ALTER TABLE ant_pac ADD CONSTRAINT fk_antxpac_pac
+	FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac);
+ALTER TABLE ant_pac ADD CONSTRAINT fk_antxpac_ant
+	FOREIGN KEY (id_ant) REFERENCES antecedentes (id_ant);
+
 ALTER TABLE odon_esp 
 ADD CONSTRAINT fk_odon
 FOREIGN KEY (id_odon) REFERENCES odontologos(id_odon);
