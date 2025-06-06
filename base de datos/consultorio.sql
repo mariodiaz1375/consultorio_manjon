@@ -1,16 +1,15 @@
-DROP SCHEMA IF EXISTS consultor_manjon;
+DROP SCHEMA IF EXISTS consultorio_manjon;
 CREATE SCHEMA consultorio_manjon;
 USE consultorio_manjon;
 
 CREATE TABLE puestos(
 	id_puesto INT AUTO_INCREMENT,
     nombre_puesto VARCHAR(20) NOT NULL,
-    CONSTRAINT pk_puestos PRIMARY KEY(id_cat)
+    CONSTRAINT pk_puestos PRIMARY KEY(id_puesto)
 );
 
 CREATE TABLE empleados(
 	id_emp INT AUTO_INCREMENT,
-    id_puesto INT NOT NULL,
     nom_emp VARCHAR(50) NOT NULL,
     ape_emp VARCHAR(50) NOT NULL,
     dni_emp VARCHAR(12) NOT NULL,
@@ -31,7 +30,7 @@ CREATE TABLE empleados_puestos(
 CREATE TABLE obras_sociales(
 	id_os INT AUTO_INCREMENT,
     nombre_os VARCHAR(20) NOT NULL,
-    CONSTRAINT pk_puestos PRIMARY KEY(id_cat)
+    CONSTRAINT pk_os PRIMARY KEY(id_os)
 );
 
 CREATE TABLE pacientes(
@@ -47,7 +46,7 @@ CREATE TABLE pacientes(
 );
 
 CREATE TABLE os_pacientes(
-	id_os INT AUTO_INCREMENT,
+	id_os_pac INT AUTO_INCREMENT,
     id_pac INT NOT NULL,
     id_os INT NOT NULL,
     titular_os VARCHAR(50) NOT NULL,
@@ -161,11 +160,9 @@ CONSTRAINT pk_pagos PRIMARY KEY(id_pago));
 
 -- AGREGANDO CONSTRAINT A LAS TABLAS CON FORANEAS
 
-ALTER TABLE empleados ADD CONSTRAINT fk_empleados_puestos
-	FOREIGN KEY (id_puestos) REFERENCES puestos (id_puestos);
-
 ALTER TABLE empleados_puestos ADD CONSTRAINT fk_exp_emp
 	FOREIGN KEY (id_emp) REFERENCES empleados (id_emp);
+    
 ALTER TABLE empleados_puestos ADD CONSTRAINT fk_exp_puesto
 	FOREIGN KEY (id_puesto) REFERENCES puestos (id_puesto);
     
@@ -202,15 +199,15 @@ FOREIGN KEY (id_trat) REFERENCES tratamientos(id_trat);
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_cd
-FOREIGN KEY (id_cd) REFERENCES tratamientos(id_cara);
+FOREIGN KEY (id_cd) REFERENCES caras_dentales(id_cara);
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_pd
-FOREIGN KEY (id_pd) REFERENCES tratamientos(id_pieza);
+FOREIGN KEY (id_pd) REFERENCES piezas_dentales(id_pieza);
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_hc
-FOREIGN KEY (id_hc) REFERENCES tratamientos(id_hc);
+FOREIGN KEY (id_hc) REFERENCES historia_clinica(id_hc);
 
 ALTER TABLE pagos
 ADD CONSTRAINT fk_cuota
@@ -218,5 +215,5 @@ FOREIGN KEY (id_cuota) REFERENCES cuotas(id_cuota);
 
 ALTER TABLE pagos
 ADD CONSTRAINT fk_entrega
-FOREIGN KEY (id_entrega) REFERENCES entegas(id_entrega);
+FOREIGN KEY (id_entrega) REFERENCES entregas(id_entrega);
 
