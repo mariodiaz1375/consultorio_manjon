@@ -39,19 +39,32 @@ CONSTRAINT pk_trat PRIMARY KEY(id_trat));
 
 CREATE TABLE pagos (
 id_pago INT AUTO_INCREMENT,
-pagado BOOLEAN NOT NULL,
+id_cuota INT,
+id_entrega INT,
+pagado BOOLEAN,
+fecha_limite DATE,
 fecha_pago TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+CREATE TABLE entregas (
+id_entrega INT AUTO_INCREMENT,
+nom_entrega VARCHAR(20) NOT NULL);
+
+CREATE TABLE cuotas (
+id_cuota INT AUTO_INCREMENT,
+nom_cuota VARCHAR(20));
 
 CREATE TABLE historia_clinica (
 id_hc INT AUTO_INCREMENT,
 id_paciente_hc INT NOT NULL,
 desc_hc VARCHAR(100),
-fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+finalizado BOOLEAN,
+pagado BOOLEAN,
+fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+fecha_fin TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 CREATE TABLE trat_pd_cd (
 id_trat_pd_cd INT AUTO_INCREMENT,
 id_trat INT NOT NULL,
-id_pago INT NOT NULL,
 id_cd INT NOT NULL,
 id_pd INT NOT NULL,
 id_hc INT NOT NULL);
