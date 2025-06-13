@@ -212,10 +212,10 @@ INSERT INTO cuotas (nom_cuota) VALUES
 ('Cuota 12');
 
 INSERT INTO pagos (id_cuota, id_entrega, id_hc, pagado, fecha_limite, fecha_pago) VALUES 
-(1, 1, 2, TRUE, '2025-06-10', '2025-05-10'),
 (2, 2, 3, FALSE, '2025-07-10', NULL),
-(3, 3, 1, TRUE, '2025-08-10', '2025-07-15'),
-(4, 4, 4, FALSE, '2025-09-10', NULL);
+(3, 1, 1, TRUE, '2025-08-10', '2025-07-15'),
+(4, 2, 4, FALSE, '2025-09-10', NULL);
 
 
 SELECT * FROM pagos;
+
