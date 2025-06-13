@@ -56,8 +56,8 @@ CREATE TABLE os_pacientes(
 
 CREATE TABLE analisis_funcionales(
 	id_af INT AUTO_INCREMENT,
-    nombre_af VARCHAR(20) NOT NULL,
-    descripcion_af VARCHAR(100),
+    nombre_af VARCHAR(30) NOT NULL,
+    descripcion_af VARCHAR(100) ,
     CONSTRAINT pk_af PRIMARY KEY(id_af)
 );
 
@@ -72,22 +72,22 @@ CREATE TABLE af_pacientes(
 
 CREATE TABLE antecedentes(
 	id_ant INT AUTO_INCREMENT,
-    nom_ant VARCHAR(20) NOT NULL,
+    nom_ant VARCHAR(30) NOT NULL,
     descripcion_ant VARCHAR(100),
     CONSTRAINT pk_ant PRIMARY KEY(id_ant)
 );
 
 CREATE TABLE ant_pac(
 	id_ant_pac INT AUTO_INCREMENT,
-	id_ant INT NOT NULL,
-    id_pac INT NOT NULL,
+	id_pac INT NOT NULL,
+    id_ant INT NOT NULL,
     descripcion_ant_pac VARCHAR(100),
     CONSTRAINT pk_ant_pac PRIMARY KEY(id_ant_pac)
 );
 
 CREATE TABLE especialidades (
 id_esp INT AUTO_INCREMENT,
-nombre_esp VARCHAR(13) NOT NULL,
+nombre_esp VARCHAR(30) NOT NULL,
 CONSTRAINT pk_esp PRIMARY KEY(id_esp));
 
 CREATE TABLE odontologos (
@@ -95,6 +95,7 @@ id_odon INT AUTO_INCREMENT,
 matricula VARCHAR(20) NOT NULL,
 nombre_odon VARCHAR(30) NOT NULL,
 apellido_odon VARCHAR(30) NOT NULL,
+dni_odon VARCHAR(12) NOT NULL,
 email_odon VARCHAR(40),
 telef_odon VARCHAR(30) NOT NULL,
 dir_odon VARCHAR(40),
@@ -242,3 +243,8 @@ FOREIGN KEY (id_odon) REFERENCES odontologos(id_odon);
 ALTER TABLE turnos
 ADD CONSTRAINT fk_emp_tur
 FOREIGN KEY (id_emp) REFERENCES empleados(id_emp);
+
+CREATE INDEX idx_dni_pac ON pacientes (dni_pac);
+
+CREATE INDEX idx_dni_odon ON odontologos (dni_odon);
+

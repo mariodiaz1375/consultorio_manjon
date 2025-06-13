@@ -1,5 +1,125 @@
 USE consultoro_manjon;
 
+INSERT INTO puestos (nombre_puesto) VALUES
+('Secretario/a'),
+('Limpieza'),
+('Cajero/a');
+
+INSERT INTO empleados (nom_emp, ape_emp, dni_emp, fec_nac_emp, dom_emp, tel_emmp, email_emp) VALUES
+('Pedro', 'Mamani', '30123456', '1985-08-10', 'Leguizamon 543', '3874123456', 'pedro.mamani@email.com'),
+('Sofía', 'Cruz', '35987654', '1992-03-20', 'Necochea 789', '3875678901', 'sofia.cruz@email.com'),
+('Ricardo', 'Flores', '28012345', '1978-11-05', 'Entre Rios 123', '3874987654', 'ricardo.flores@email.com'),
+('Romina', 'Vargas', '33901234', '1993-02-18', 'Ayacucho 707', '3874667788', 'romina.vargas@email.com');
+
+INSERT INTO empleados_puestos (id_emp, id_puesto) VALUES
+(1, 3),
+(2, 1),
+(2, 2),
+(3, 1),
+(4, 2);
+
+INSERT INTO obras_sociales (nombre_os) VALUES
+('OSECAC'),
+('Boreal'),
+('IPS'),
+('PAMI'),
+('Galeno');
+
+INSERT INTO pacientes (nom_pac, ape_pac, dni_pac, fec_nac_pac, dom_pac, tel_pac, email_pac) VALUES
+('Marcelo', 'García', '25111222', '1970-03-10', 'España 800', '3874112233', 'marcelo.garcia@email.com'),
+('Verónica', 'Paz', '30222333', '1982-07-25', 'Caseros 150', '3875223344', 'veronica.paz@email.com'),
+('Esteban', 'Castro', '28333444', '1975-01-15', 'Balcarce 300', '3874334455', 'esteban.castro@email.com'),
+('Carolina', 'Soto', '33444555', '1990-09-01', 'Alvarado 650', '3875445566', 'carolina.soto@email.com'),
+('Fernando', 'Acosta', '27555666', '1980-04-20', 'Dean Funes 400', '3874556677', 'fernando.acosta@email.com'),
+('Romina', 'Quiroga', '31666777', '1988-11-12', 'San Martín 920', '3875667788', 'romina.quiroga@email.com'),
+('Sergio', 'Herrera', '29777888', '1972-06-05', 'Mitre 250', '3874778899', 'sergio.herrera@email.com'),
+('Julieta', 'Luna', '34888999', '1995-02-28', 'Rivadavia 710', '3875889900', 'julieta.luna@email.com'),
+('Alejandro', 'Ramos', '26999000', '1977-08-18', 'Urquiza 110', '3874990011', 'alejandro.ramos@email.com'),
+('Soledad', 'Ortiz', '32000111', '1991-05-03', 'Pueyrredón 530', '3875001122', 'soledad.ortiz@email.com'),
+('Roberto', 'Benítez', '24111222', '1965-10-07', 'San Juan 200', '3874123123', 'roberto.benitez@email.com'),
+('Mariela', 'Aguirre', '29222333', '1987-01-22', 'Entre Ríos 900', '3875234234', 'mariela.aguirre@email.com'),
+('Gonzalo', 'Miranda', '27333444', '1979-03-14', 'Zuviría 450', '3874345345', 'gonzalo.miranda@email.com'),
+('Laura', 'Peralta', '33444555', '1993-07-09', 'Chacabuco 700', '3875456456', 'laura.peralta@email.com'),
+('Juan Cruz', 'Navarro', '26555666', '1974-12-01', 'Cordoba 100', '3874567567', 'juancruz.navarro@email.com'),
+('Daniela', 'Fernández', '30666777', '1986-09-08', 'La Rioja 850', '3875678678', 'daniela.fernandez@email.com'),
+('Martín', 'Giménez', '28777888', '1971-02-19', 'Santa Fe 300', '3874789789', 'martin.gimenez@email.com'),
+('Florencia', 'Maidana', '34888999', '1994-04-24', 'Catamarca 600', '3875890890', 'florencia.maidana@email.com'),
+('Gabriel', 'Nuñez', '25999000', '1968-06-30', 'Salta 50', '3874901901', 'gabriel.nunez@email.com'),
+('Natalia', 'Vera', '31000111', '1989-10-16', 'Jujuy 220', '3875012012', 'natalia.vera@email.com');
+
+INSERT INTO os_pacientes (id_pac, id_os, titular_os, dni_titular_os) VALUES
+(1, 1, 'Marcelo García', '25111222'),
+(2, 2, 'Verónica Paz', '30222333'),
+(3, 3, 'Esteban Castro', '28333444'),
+(4, 4, 'Carolina Soto', '33444555'),
+(5, 5, 'Fernando Acosta', '27555666'),
+(6, 1, 'Romina Quiroga', '31666777'),
+(7, 2, 'Sergio Herrera', '29777888'),
+(8, 3, 'Julieta Luna', '34888999'),
+(9, 4, 'Alejandro Ramos', '26999000'),
+(10, 5, 'Soledad Ortiz', '32000111');
+
+INSERT INTO analisis_funcionales (nombre_af) VALUES
+('Respiracion Normal'),
+('Respiracion Nasal'),
+('Respiracion Mixta'),
+('Deglucion Normal'),
+('Deglucion Atipica'),
+('Actividad lingual');
+
+INSERT INTO af_pacientes (id_pac, id_af) VALUES
+(1, 3),
+(1, 5),
+(2, 1),
+(2, 6),
+(4, 3),
+(10, 5),
+(10, 6),
+(13, 1),
+(13, 3),
+(15, 2),
+(15, 6),
+(16, 3),
+(17, 2),
+(18, 4);
+
+INSERT INTO antecedentes (nom_ant) VALUES
+("Alergias"),
+("Anemia"),
+("Artritis"),
+("Asma"),
+("Desnutricion"),
+("Diabetes"),
+("Epilepsia"),
+("Embarazada o sospecha"),
+("Fiebre Reumatica"),
+("Glaucoma"),
+("Hemorragias"),
+("Hepatitis"),
+("Herpes"),
+("Hipertension");
+
+INSERT INTO ant_pac (id_pac, id_ant) VALUES
+(1, 3),
+(1, 5),
+(2, 9),
+(2, 6),
+(3, 4),
+(4, 3),
+(4, 2),
+(5, 1),
+(5, 7),
+(6, 2),
+(10, 5),
+(10, 9),
+(13, 10),
+(13, 3),
+(15, 2),
+(15, 6),
+(16, 3),
+(17, 5),
+(18, 12);
+
 INSERT INTO especialidades (nombre_esp) VALUES 
 ('Ortodoncia'),
 ('Endodoncia'),
@@ -11,12 +131,17 @@ INSERT INTO especialidades (nombre_esp) VALUES
 ('Cirugía Oral'),
 ('Odontología General');
 
-INSERT INTO odontologos (matricula, nombre_odon, apellido_odon, email_odon, telef_odon, dir_odon) VALUES 
-('MAT001', 'Carla', 'González', 'carla.gonzalez@example.com', '123456789', 'Calle Falsa 123'),
-('MAT002', 'Luis', 'Pérez', 'luis.perez@example.com', '987654321', 'Avenida Siempre Viva 456'),
-('MAT003', 'Ana', 'López', 'ana.lopez@example.com', '456123789', 'Calle de la Paz 789'),
-('MAT004', 'Sofia', 'Martínez', 'sofia.martinez@example.com', '321654987', 'Boulevard del Sol 321'),
-('MAT005', 'Juan', 'Fernández', 'juan.fernandez@example.com', '789456123', 'Plaza Mayor 654');
+INSERT INTO odontologos (matricula, nombre_odon, apellido_odon, dni_odon, email_odon, telef_odon, dir_odon) VALUES 
+('MAT001', 'Carla', 'González', '12345678A', 'carla.gonzalez@example.com', '555-1234', 'Calle Principal 123'),
+('MAT002', 'Luis', 'Pérez', '23456789B', 'luis.perez@example.com', '555-5678', 'Avenida Libertad 456'),
+('MAT003', 'Ana', 'López', '34567890C', 'ana.lopez@example.com', '555-8765', 'Calle Falsa 789'),
+('MAT004', 'Javier', 'Martínez', '45678901D', 'javier.martinez@example.com', '555-4321', 'Plaza Nueva 321'),
+('MAT005', 'Sofía', 'Rodríguez', '56789012E', 'sofia.rodriguez@example.com', '555-2345', 'Calle del Sol 654'),
+('MAT006', 'José', 'Hernández', '67890123F', 'jose.hernandez@example.com', '555-8765', 'Avenida del Mar 987'),
+('MAT007', 'María', 'García', '78901234G', 'maria.garcia@example.com', '555-3456', 'Calle de la Paz 135'),
+('MAT008', 'Diego', 'Sánchez', '89012345H', 'diego.sanchez@example.com', '555-6543', 'Calle de la Luna 246'),
+('MAT009', 'Claudia', 'Jiménez', '90123456I', 'claudia.jimenez@example.com', '555-1238', 'Calle de la Selva 357'),
+('MAT010', 'Pedro', 'Fernández', '01234567J', 'pedro.fernandez@example.com', '555-9876', 'Calle del Agua 468');
 
 INSERT INTO odon_esp (id_odon, id_esp) VALUES 
 (1, 1), 
@@ -86,9 +211,11 @@ INSERT INTO cuotas (nom_cuota) VALUES
 ('Cuota 11'),
 ('Cuota 12');
 
-INSERT INTO pagos (id_cuota, id_entrega, pagado, fecha_limite, fecha_pago) VALUES 
-(1, 1, TRUE, '2025-06-10', '2025-05-10'),
-(2, 2, FALSE, '2025-07-10', NULL),
-(3, 3, TRUE, '2025-08-10', '2025-07-15'),
-(4, 4, FALSE, '2025-09-10', NULL);
+INSERT INTO pagos (id_cuota, id_entrega, id_hc, pagado, fecha_limite, fecha_pago) VALUES 
+(1, 1, 2, TRUE, '2025-06-10', '2025-05-10'),
+(2, 2, 3, FALSE, '2025-07-10', NULL),
+(3, 3, 1, TRUE, '2025-08-10', '2025-07-15'),
+(4, 4, 4, FALSE, '2025-09-10', NULL);
 
+
+SELECT * FROM pagos;
