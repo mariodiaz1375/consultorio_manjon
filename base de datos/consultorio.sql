@@ -202,7 +202,9 @@ FOREIGN KEY (id_esp) REFERENCES especialidades(id_esp);
 
 ALTER TABLE historia_clinica
 ADD CONSTRAINT fk_paciente
-FOREIGN KEY (id_paciente_hc) REFERENCES pacientes(id_pac);
+FOREIGN KEY (id_paciente_hc) REFERENCES pacientes(id_pac)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_trat
@@ -218,7 +220,9 @@ FOREIGN KEY (id_pd) REFERENCES piezas_dentales(id_pieza);
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_hc
-FOREIGN KEY (id_hc) REFERENCES historia_clinica(id_hc);
+FOREIGN KEY (id_hc) REFERENCES historia_clinica(id_hc)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 ALTER TABLE pagos
 ADD CONSTRAINT fk_cuota
