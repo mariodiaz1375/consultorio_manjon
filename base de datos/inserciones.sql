@@ -1,4 +1,4 @@
-USE consultoro_manjon;
+USE consultorio_manjon;
 
 INSERT INTO puestos (nombre_puesto) VALUES
 ('Secretario/a'),
