@@ -1,3 +1,4 @@
+
 SELECT * FROM pacientes;
 SELECT * FROM historia_clinica;
 
