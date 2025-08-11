@@ -134,6 +134,7 @@ CONSTRAINT pk_trat PRIMARY KEY(id_trat));
 CREATE TABLE historia_clinica (
 id_hc INT AUTO_INCREMENT,
 id_paciente_hc INT NOT NULL,
+id_odon_hc INT,
 desc_hc VARCHAR(100),
 finalizado BOOLEAN,
 pagado BOOLEAN,
@@ -206,6 +207,10 @@ FOREIGN KEY (id_paciente_hc) REFERENCES pacientes(id_pac)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
 
+ALTER TABLE historia_clinica
+ADD CONSTRAINT fk_odon_hc
+FOREIGN KEY (id_odon_hc) REFERENCES odontologos(id_odon);
+
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_trat
 FOREIGN KEY (id_trat) REFERENCES tratamientos(id_trat);
@@ -247,6 +252,8 @@ FOREIGN KEY (id_odon) REFERENCES odontologos(id_odon);
 ALTER TABLE turnos
 ADD CONSTRAINT fk_emp_tur
 FOREIGN KEY (id_emp) REFERENCES empleados(id_emp);
+
+-- CREACION DE INDICES
 
 CREATE INDEX idx_dni_pac ON pacientes (dni_pac);
 
