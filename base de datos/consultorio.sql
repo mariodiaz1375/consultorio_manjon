@@ -15,7 +15,8 @@ CREATE TABLE puestos(
 
 CREATE TABLE horas(
 	id_hora INT AUTO_INCREMENT,
-    hora TIME NOT NULL
+    hora TIME NOT NULL,
+    CONSTRAINT pk_hora PRIMARY KEY(id_hora)
 );
 
 CREATE TABLE personal(
