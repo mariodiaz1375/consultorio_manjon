@@ -8,23 +8,24 @@ CREATE TABLE puestos(
     CONSTRAINT pk_puestos PRIMARY KEY(id_puesto)
 );
 
-CREATE TABLE empleados(
-	id_emp INT AUTO_INCREMENT,
-    nom_emp VARCHAR(50) NOT NULL,
-    ape_emp VARCHAR(50) NOT NULL,
-    dni_emp VARCHAR(12) NOT NULL,
-    fec_nac_emp DATE,
-    dom_emp VARCHAR(50) NOT NULL,
-    tel_emmp VARCHAR(40) NOT NULL,
-    email_emp VARCHAR(50),
-    CONSTRAINT pk_emp PRIMARY KEY(id_emp)
+CREATE TABLE personal(
+	id_pers INT AUTO_INCREMENT,
+    nom_pers VARCHAR(50) NOT NULL,
+    ape_pers VARCHAR(50) NOT NULL,
+    dni_pers VARCHAR(12) NOT NULL,
+    matricula VARCHAR(20),
+    fec_nac_pers DATE,
+    dom_pers VARCHAR(50) NOT NULL,
+    tel_pers VARCHAR(40) NOT NULL,
+    email_pers VARCHAR(50),
+    CONSTRAINT pk_pers PRIMARY KEY(id_pers)
 );
 
-CREATE TABLE empleados_puestos(
-	id_emp_puesto INT AUTO_INCREMENT,
-	id_emp INT NOT NULL,
+CREATE TABLE personal_puestos(
+	id_pers_puesto INT AUTO_INCREMENT,
+	id_pers INT NOT NULL,
     id_puesto INT NOT NULL,
-    CONSTRAINT pk_empleados_puestos PRIMARY KEY(id_emp_puesto)
+    CONSTRAINT pk_personal_puestos PRIMARY KEY(id_pers_puesto)
 );
 
 CREATE TABLE obras_sociales(
@@ -90,7 +91,7 @@ id_esp INT AUTO_INCREMENT,
 nombre_esp VARCHAR(30) NOT NULL,
 CONSTRAINT pk_esp PRIMARY KEY(id_esp));
 
-CREATE TABLE odontologos (
+/*CREATE TABLE odontologos (
 id_odon INT AUTO_INCREMENT,
 matricula VARCHAR(20) NOT NULL,
 nombre_odon VARCHAR(30) NOT NULL,
@@ -99,11 +100,11 @@ dni_odon VARCHAR(12) NOT NULL,
 email_odon VARCHAR(40),
 telef_odon VARCHAR(30) NOT NULL,
 dir_odon VARCHAR(40),
-CONSTRAINT pk_odontologo PRIMARY KEY(id_odon));
+CONSTRAINT pk_odontologo PRIMARY KEY(id_odon));*/
 
 CREATE TABLE odon_esp (
 id_odonxesp INT AUTO_INCREMENT,
-id_odon INT NOT NULL,
+id_pers INT NOT NULL,
 id_esp INT NOT NULL,
 CONSTRAINT pk_odonxesp PRIMARY KEY(id_odonxesp));
 
@@ -111,7 +112,6 @@ CREATE TABLE turnos (
 id_turno INT AUTO_INCREMENT,
 id_pac INT NOT NULL,
 id_odon INT NOT NULL,
-id_emp INT NOT NULL,
 fecha_turno TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 CONSTRAINT pk_turno PRIMARY KEY(id_turno));
 
@@ -134,10 +134,9 @@ CONSTRAINT pk_trat PRIMARY KEY(id_trat));
 CREATE TABLE historia_clinica (
 id_hc INT AUTO_INCREMENT,
 id_paciente_hc INT NOT NULL,
-id_odon_hc INT,
+id_odon_hc INT NOT NULL,
 desc_hc VARCHAR(100),
 finalizado BOOLEAN,
-pagado BOOLEAN,
 fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 fecha_fin DATE,
 CONSTRAINT pk_hc PRIMARY KEY(id_hc));
@@ -172,10 +171,10 @@ CONSTRAINT pk_pagos PRIMARY KEY(id_pago));
 
 -- AGREGANDO CONSTRAINT A LAS TABLAS CON FORANEAS
 
-ALTER TABLE empleados_puestos ADD CONSTRAINT fk_exp_emp
-	FOREIGN KEY (id_emp) REFERENCES empleados (id_emp);
+ALTER TABLE personal_puestos ADD CONSTRAINT fk_perxp_pers
+	FOREIGN KEY (id_pers) REFERENCES personal (id_pers);
     
-ALTER TABLE empleados_puestos ADD CONSTRAINT fk_exp_puesto
+ALTER TABLE personal_puestos ADD CONSTRAINT fk_perxp_puesto
 	FOREIGN KEY (id_puesto) REFERENCES puestos (id_puesto);
     
 ALTER TABLE os_pacientes ADD CONSTRAINT fk_osxpac_os
@@ -194,8 +193,8 @@ ALTER TABLE ant_pac ADD CONSTRAINT fk_antxpac_ant
 	FOREIGN KEY (id_ant) REFERENCES antecedentes (id_ant);
 
 ALTER TABLE odon_esp 
-ADD CONSTRAINT fk_odon
-FOREIGN KEY (id_odon) REFERENCES odontologos(id_odon);
+ADD CONSTRAINT fk_pers
+FOREIGN KEY (id_pers) REFERENCES personal(id_pers);
 
 ALTER TABLE odon_esp 
 ADD CONSTRAINT fk_esp
@@ -209,7 +208,7 @@ ON DELETE CASCADE;
 
 ALTER TABLE historia_clinica
 ADD CONSTRAINT fk_odon_hc
-FOREIGN KEY (id_odon_hc) REFERENCES odontologos(id_odon);
+FOREIGN KEY (id_odon_hc) REFERENCES personal(id_pers);
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_trat
@@ -247,15 +246,11 @@ FOREIGN KEY (id_pac) REFERENCES pacientes(id_pac);
 
 ALTER TABLE turnos
 ADD CONSTRAINT fk_odon_tur
-FOREIGN KEY (id_odon) REFERENCES odontologos(id_odon);
-
-ALTER TABLE turnos
-ADD CONSTRAINT fk_emp_tur
-FOREIGN KEY (id_emp) REFERENCES empleados(id_emp);
+FOREIGN KEY (id_odon) REFERENCES personal(id_pers);
 
 -- CREACION DE INDICES
 
 CREATE INDEX idx_dni_pac ON pacientes (dni_pac);
 
-CREATE INDEX idx_dni_odon ON odontologos (dni_odon);
+CREATE INDEX idx_dni_pers ON personal (dni_pers);
 
