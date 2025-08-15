@@ -8,6 +8,16 @@ CREATE TABLE puestos(
     CONSTRAINT pk_puestos PRIMARY KEY(id_puesto)
 );
 
+/*CREATE TABLE dias(
+	id_dia INT AUTO_INCREMENT,
+    dia VARCHAR(20) NOT NULL
+);*/
+
+CREATE TABLE horas(
+	id_hora INT AUTO_INCREMENT,
+    hora TIME NOT NULL
+);
+
 CREATE TABLE personal(
 	id_pers INT AUTO_INCREMENT,
     nom_pers VARCHAR(50) NOT NULL,
@@ -112,7 +122,8 @@ CREATE TABLE turnos (
 id_turno INT AUTO_INCREMENT,
 id_pac INT NOT NULL,
 id_odon INT NOT NULL,
-fecha_turno TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+fecha_turno DATE NOT NULL,
+hora_turno INT NOT NULL,
 CONSTRAINT pk_turno PRIMARY KEY(id_turno));
 
 CREATE TABLE piezas_dentales (
@@ -199,6 +210,10 @@ FOREIGN KEY (id_pers) REFERENCES personal(id_pers);
 ALTER TABLE odon_esp 
 ADD CONSTRAINT fk_esp
 FOREIGN KEY (id_esp) REFERENCES especialidades(id_esp);
+
+ALTER TABLE turnos 
+ADD CONSTRAINT fk_hora
+FOREIGN KEY (hora_turno) REFERENCES horas(id_hora);
 
 ALTER TABLE historia_clinica
 ADD CONSTRAINT fk_paciente
