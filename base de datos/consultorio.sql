@@ -13,11 +13,11 @@ CREATE TABLE puestos(
     dia VARCHAR(20) NOT NULL
 );*/
 
-CREATE TABLE horas(
+/*CREATE TABLE horas(
 	id_hora INT AUTO_INCREMENT,
     hora TIME NOT NULL,
     CONSTRAINT pk_hora PRIMARY KEY(id_hora)
-);
+);*/
 
 CREATE TABLE personal(
 	id_pers INT AUTO_INCREMENT,
@@ -61,8 +61,7 @@ CREATE TABLE os_pacientes(
 	id_os_pac INT AUTO_INCREMENT,
     id_pac INT NOT NULL,
     id_os INT NOT NULL,
-    titular_os VARCHAR(50) NOT NULL,
-    dni_titular_os VARCHAR(12) NOT NULL,
+    num_afiliado VARCHAR(50) NOT NULL,
     CONSTRAINT pk_os_pac PRIMARY KEY(id_os_pac)
 );
 
@@ -121,10 +120,10 @@ CONSTRAINT pk_odonxesp PRIMARY KEY(id_odonxesp));
 
 CREATE TABLE turnos (
 id_turno INT AUTO_INCREMENT,
-id_pac INT NOT NULL,
+id_pac INT,
 id_odon INT NOT NULL,
 fecha_turno DATE NOT NULL,
-hora_turno INT NOT NULL,
+hora_turno TIME NOT NULL,
 CONSTRAINT pk_turno PRIMARY KEY(id_turno));
 
 CREATE TABLE piezas_dentales (
@@ -184,59 +183,74 @@ CONSTRAINT pk_pagos PRIMARY KEY(id_pago));
 -- AGREGANDO CONSTRAINT A LAS TABLAS CON FORANEAS
 
 ALTER TABLE personal_puestos ADD CONSTRAINT fk_perxp_pers
-	FOREIGN KEY (id_pers) REFERENCES personal (id_pers);
+FOREIGN KEY (id_pers) REFERENCES personal (id_pers)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
     
 ALTER TABLE personal_puestos ADD CONSTRAINT fk_perxp_puesto
-	FOREIGN KEY (id_puesto) REFERENCES puestos (id_puesto);
+FOREIGN KEY (id_puesto) REFERENCES puestos (id_puesto)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
     
 ALTER TABLE os_pacientes ADD CONSTRAINT fk_osxpac_os
-	FOREIGN KEY (id_os) REFERENCES obras_sociales (id_os);
+FOREIGN KEY (id_os) REFERENCES obras_sociales (id_os)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 ALTER TABLE os_pacientes ADD CONSTRAINT fk_oscpac_pac
-	FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac);
+FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
     
 ALTER TABLE af_pacientes ADD CONSTRAINT fk_afxpac_pac
-	FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac);
+FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 ALTER TABLE af_pacientes ADD CONSTRAINT fk_afxpac_af
-	FOREIGN KEY (id_af) REFERENCES analisis_funcionales (id_af);
+FOREIGN KEY (id_af) REFERENCES analisis_funcionales (id_af)
+ON UPDATE CASCADE;
     
 ALTER TABLE ant_pac ADD CONSTRAINT fk_antxpac_pac
-	FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac);
+FOREIGN KEY (id_pac) REFERENCES pacientes (id_pac)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 ALTER TABLE ant_pac ADD CONSTRAINT fk_antxpac_ant
-	FOREIGN KEY (id_ant) REFERENCES antecedentes (id_ant);
+FOREIGN KEY (id_ant) REFERENCES antecedentes (id_ant)
+ON UPDATE CASCADE;
 
 ALTER TABLE odon_esp 
 ADD CONSTRAINT fk_pers
-FOREIGN KEY (id_pers) REFERENCES personal(id_pers);
-
+FOREIGN KEY (id_pers) REFERENCES personal(id_pers)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 ALTER TABLE odon_esp 
 ADD CONSTRAINT fk_esp
-FOREIGN KEY (id_esp) REFERENCES especialidades(id_esp);
-
-ALTER TABLE turnos 
-ADD CONSTRAINT fk_hora
-FOREIGN KEY (hora_turno) REFERENCES horas(id_hora);
+FOREIGN KEY (id_esp) REFERENCES especialidades(id_esp)
+ON UPDATE CASCADE;
 
 ALTER TABLE historia_clinica
 ADD CONSTRAINT fk_paciente
 FOREIGN KEY (id_paciente_hc) REFERENCES pacientes(id_pac)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
-
 ALTER TABLE historia_clinica
 ADD CONSTRAINT fk_odon_hc
-FOREIGN KEY (id_odon_hc) REFERENCES personal(id_pers);
+FOREIGN KEY (id_odon_hc) REFERENCES personal(id_pers)
+ON UPDATE CASCADE;
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_trat
-FOREIGN KEY (id_trat) REFERENCES tratamientos(id_trat);
+FOREIGN KEY (id_trat) REFERENCES tratamientos(id_trat)
+ON UPDATE CASCADE;
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_cd
-FOREIGN KEY (id_cd) REFERENCES caras_dentales(id_cara);
+FOREIGN KEY (id_cd) REFERENCES caras_dentales(id_cara)
+ON UPDATE CASCADE;
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_pd
-FOREIGN KEY (id_pd) REFERENCES piezas_dentales(id_pieza);
+FOREIGN KEY (id_pd) REFERENCES piezas_dentales(id_pieza)
+ON UPDATE CASCADE;
 
 ALTER TABLE trat_pd_cd
 ADD CONSTRAINT fk_hc
@@ -247,22 +261,24 @@ ON UPDATE CASCADE;
 ALTER TABLE pagos
 ADD CONSTRAINT fk_cuota
 FOREIGN KEY (id_cuota) REFERENCES cuotas(id_cuota);
-
 ALTER TABLE pagos
 ADD CONSTRAINT fk_entrega
 FOREIGN KEY (id_entrega) REFERENCES entregas(id_entrega);
-
 ALTER TABLE pagos
 ADD CONSTRAINT fk_hc_pag
-FOREIGN KEY (id_hc) REFERENCES historia_clinica(id_hc);
+FOREIGN KEY (id_hc) REFERENCES historia_clinica(id_hc)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 
 ALTER TABLE turnos
 ADD CONSTRAINT fk_pac
-FOREIGN KEY (id_pac) REFERENCES pacientes(id_pac);
-
+FOREIGN KEY (id_pac) REFERENCES pacientes(id_pac)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
 ALTER TABLE turnos
 ADD CONSTRAINT fk_odon_tur
-FOREIGN KEY (id_odon) REFERENCES personal(id_pers);
+FOREIGN KEY (id_odon) REFERENCES personal(id_pers)
+ON UPDATE CASCADE;
 
 -- CREACION DE INDICES
 
