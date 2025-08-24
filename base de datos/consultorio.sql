@@ -24,11 +24,12 @@ CREATE TABLE personal(
     nom_pers VARCHAR(50) NOT NULL,
     ape_pers VARCHAR(50) NOT NULL,
     dni_pers VARCHAR(12) NOT NULL,
-    matricula VARCHAR(20),
     fec_nac_pers DATE,
     dom_pers VARCHAR(50) NOT NULL,
     tel_pers VARCHAR(40) NOT NULL,
     email_pers VARCHAR(50),
+    matricula VARCHAR(20),
+    activo BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_pers PRIMARY KEY(id_pers)
 );
 
@@ -54,6 +55,7 @@ CREATE TABLE pacientes(
     dom_pac VARCHAR(50) NOT NULL,
     tel_pac VARCHAR(40) NOT NULL,
     email_pac VARCHAR(50),
+    activo BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_pac PRIMARY KEY(id_pac)
 );
 
@@ -114,7 +116,7 @@ CONSTRAINT pk_odontologo PRIMARY KEY(id_odon));*/
 
 CREATE TABLE odon_esp (
 id_odonxesp INT AUTO_INCREMENT,
-id_pers INT NOT NULL,
+id_odon INT NOT NULL,
 id_esp INT NOT NULL,
 CONSTRAINT pk_odonxesp PRIMARY KEY(id_odonxesp));
 
@@ -147,7 +149,6 @@ id_hc INT AUTO_INCREMENT,
 id_paciente_hc INT NOT NULL,
 id_odon_hc INT NOT NULL,
 desc_hc VARCHAR(100),
-finalizado BOOLEAN,
 fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 fecha_fin DATE,
 CONSTRAINT pk_hc PRIMARY KEY(id_hc));
@@ -218,8 +219,8 @@ FOREIGN KEY (id_ant) REFERENCES antecedentes (id_ant)
 ON UPDATE CASCADE;
 
 ALTER TABLE odon_esp 
-ADD CONSTRAINT fk_pers
-FOREIGN KEY (id_pers) REFERENCES personal(id_pers)
+ADD CONSTRAINT fk_odon
+FOREIGN KEY (id_odon) REFERENCES personal(id_pers)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
 ALTER TABLE odon_esp 

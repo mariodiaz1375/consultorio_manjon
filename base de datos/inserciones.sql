@@ -3,20 +3,8 @@ USE consultorio_manjon;
 INSERT INTO puestos (nombre_puesto) VALUES
 ('Secretario/a'),
 ('Limpieza'),
+('Odontólogo'),
 ('Cajero/a');
-
-INSERT INTO empleados (nom_emp, ape_emp, dni_emp, fec_nac_emp, dom_emp, tel_emmp, email_emp) VALUES
-('Pedro', 'Mamani', '30123456', '1985-08-10', 'Leguizamon 543', '3874123456', 'pedro.mamani@email.com'),
-('Sofía', 'Cruz', '35987654', '1992-03-20', 'Necochea 789', '3875678901', 'sofia.cruz@email.com'),
-('Ricardo', 'Flores', '28012345', '1978-11-05', 'Entre Rios 123', '3874987654', 'ricardo.flores@email.com'),
-('Romina', 'Vargas', '33901234', '1993-02-18', 'Ayacucho 707', '3874667788', 'romina.vargas@email.com');
-
-INSERT INTO empleados_puestos (id_emp, id_puesto) VALUES
-(1, 3),
-(2, 1),
-(2, 2),
-(3, 1),
-(4, 2);
 
 INSERT INTO obras_sociales (nombre_os) VALUES
 ('OSECAC'),
@@ -47,17 +35,17 @@ INSERT INTO pacientes (nom_pac, ape_pac, dni_pac, fec_nac_pac, dom_pac, tel_pac,
 ('Gabriel', 'Nuñez', '25999000', '1968-06-30', 'Salta 50', '3874901901', 'gabriel.nunez@email.com'),
 ('Natalia', 'Vera', '31000111', '1989-10-16', 'Jujuy 220', '3875012012', 'natalia.vera@email.com');
 
-INSERT INTO os_pacientes (id_pac, id_os, titular_os, dni_titular_os) VALUES
-(1, 1, 'Marcelo García', '25111222'),
-(2, 2, 'Verónica Paz', '30222333'),
-(3, 3, 'Esteban Castro', '28333444'),
-(4, 4, 'Carolina Soto', '33444555'),
-(5, 5, 'Fernando Acosta', '27555666'),
-(6, 1, 'Romina Quiroga', '31666777'),
-(7, 2, 'Sergio Herrera', '29777888'),
-(8, 3, 'Julieta Luna', '34888999'),
-(9, 4, 'Alejandro Ramos', '26999000'),
-(10, 5, 'Soledad Ortiz', '32000111');
+INSERT INTO os_pacientes (id_pac, id_os, num_afiliado) VALUES
+(1, 1, '25111222'),
+(2, 2, '30222333'),
+(3, 3, '28333444'),
+(4, 4, '33444555'),
+(5, 5, '27555666'),
+(6, 1, '31666777'),
+(7, 2, '29777888'),
+(8, 3, '34888999'),
+(9, 4, '26999000'),
+(10, 5, '32000111');
 
 INSERT INTO analisis_funcionales (nombre_af) VALUES
 ('Respiracion Normal'),
@@ -131,17 +119,30 @@ INSERT INTO especialidades (nombre_esp) VALUES
 ('Cirugía Oral'),
 ('Odontología General');
 
-INSERT INTO odontologos (matricula, nombre_odon, apellido_odon, dni_odon, email_odon, telef_odon, dir_odon) VALUES 
-('MAT001', 'Carla', 'González', '12345678A', 'carla.gonzalez@example.com', '555-1234', 'Calle Principal 123'),
-('MAT002', 'Luis', 'Pérez', '23456789B', 'luis.perez@example.com', '555-5678', 'Avenida Libertad 456'),
-('MAT003', 'Ana', 'López', '34567890C', 'ana.lopez@example.com', '555-8765', 'Calle Falsa 789'),
-('MAT004', 'Javier', 'Martínez', '45678901D', 'javier.martinez@example.com', '555-4321', 'Plaza Nueva 321'),
-('MAT005', 'Sofía', 'Rodríguez', '56789012E', 'sofia.rodriguez@example.com', '555-2345', 'Calle del Sol 654'),
-('MAT006', 'José', 'Hernández', '67890123F', 'jose.hernandez@example.com', '555-8765', 'Avenida del Mar 987'),
-('MAT007', 'María', 'García', '78901234G', 'maria.garcia@example.com', '555-3456', 'Calle de la Paz 135'),
-('MAT008', 'Diego', 'Sánchez', '89012345H', 'diego.sanchez@example.com', '555-6543', 'Calle de la Luna 246'),
-('MAT009', 'Claudia', 'Jiménez', '90123456I', 'claudia.jimenez@example.com', '555-1238', 'Calle de la Selva 357'),
-('MAT010', 'Pedro', 'Fernández', '01234567J', 'pedro.fernandez@example.com', '555-9876', 'Calle del Agua 468');
+INSERT INTO personal (nom_pers, ape_pers, dni_pers, fec_nac_pers, dom_pers, tel_pers, email_pers, matricula) VALUES 
+('Laura', 'Sánchez', '27123456', '1984-03-12', 'Av. Rivadavia 1234', '1167892345', 'laura.sanchez@email.com', 'M10001'),
+('Ricardo', 'Molina', '28234567', '1978-07-19', 'Calle San Juan 456', '1145678234', 'ricardo.molina@email.com', 'M10002'),
+('Ana', 'Cabrera', '29543210', '1990-12-03', 'Av. Belgrano 789', '1154321876', 'ana.cabrera@email.com', 'M10003'),
+('Héctor', 'Giménez', '30123456', '1982-05-20', 'Mitre 456', '1134567891', 'hector.gimenez@email.com', 'M10004'),
+('Verónica', 'Ramos', '27678901', '1986-11-08', 'Salta 1000', '1176543209', 'veronica.ramos@email.com', 'M10005'),
+('Daniel', 'Vega', '28890123', '1975-08-25', 'Perón 123', '1123987612', 'daniel.vega@email.com', NULL),
+('Mariela', 'Acosta', '31234567', '1991-09-14', 'Entre Ríos 2345', '1187654321', 'mariela.acosta@email.com', NULL),
+('Gustavo', 'Silva', '27987654', '1983-02-28', 'Callao 3456', '1165432198', 'gustavo.silva@email.com', NULL),
+('Patricia', 'Navarro', '29098765', '1987-06-11', 'Av. Córdoba 678', '1156784321', 'patricia.navarro@email.com', NULL),
+('Sergio', 'Morales', '28567890', '1979-10-07', 'Santa Fe 1200', '1178123490', 'sergio.morales@email.com', NULL);
+
+INSERT INTO personal_puestos (id_pers, id_puesto) VALUES
+(1, 3),
+(2, 3),
+(3, 3),
+(4, 3),
+(5, 3),
+(6, 2),
+(7, 1),
+(7, 2),
+(8, 4),
+(9, 1),
+(10, 1);
 
 INSERT INTO odon_esp (id_odon, id_esp) VALUES 
 (1, 1), 
@@ -153,57 +154,27 @@ INSERT INTO odon_esp (id_odon, id_esp) VALUES
 (4, 5),
 (5, 6);
 
-INSERT INTO turnos (id_pac, id_odon, id_emp) VALUES 
-(1, 3, 2),
-(2, 5, 1),
-(3, 1, 4),
-(4, 6, 3),
-(5, 8, 1),
-(6, 4, 2),
-(7, 2, 1),
-(8, 7, 3),
-(9, 9, 2),
-(10, 5, 4),
-(1, 8, 2),
-(2, 10, 1),
-(3, 3, 3),
-(4, 6, 2),
-(5, 9, 1),
-(6, 2, 4),
-(7, 1, 2),
-(8, 7, 1),
-(9, 8, 3),
-(10, 10, 2),
-(11, 3, 4),
-(12, 5, 1),
-(13, 4, 2),
-(14, 6, 3),
-(15, 2, 3),
-(16, 1, 4),
-(17, 8, 1),
-(18, 9, 3),
-(19, 7, 2),
-(20, 5, 1),
-(1, 2, 4),
-(2, 10, 3),
-(3, 9, 2),
-(4, 1, 2),
-(5, 4, 1),
-(6, 6, 4),
-(7, 8, 2),
-(8, 1, 1),
-(9, 10, 3),
-(10, 2, 4),
-(11, 5, 1),
-(12, 3, 3),
-(13, 7, 2),
-(14, 4, 2),
-(15, 2, 4),
-(16, 1, 3),
-(17, 9, 2),
-(18, 8, 1),
-(19, 10, 3),
-(20, 6, 3);
+INSERT INTO turnos (id_pac, id_odon, fecha_turno, hora_turno) VALUES
+(3, 1, '2025-08-25', '09:00:00'),
+(7, 2, '2025-08-26', '10:30:00'),
+(5, 3, '2025-08-27', '11:00:00'),
+(12, 4, '2025-08-28', '14:00:00'),
+(8, 5, '2025-08-29', '15:30:00'),
+(14, 1, '2025-08-30', '09:30:00'),
+(2, 2, '2025-09-01', '08:00:00'),
+(9, 3, '2025-09-01', '16:00:00'),
+(11, 4, '2025-09-02', '12:30:00'),
+(4, 5, '2025-09-03', '13:00:00'),
+(15, 1, '2025-09-03', '10:00:00'),
+(6, 2, '2025-09-04', '11:30:00'),
+(17, 3, '2025-09-05', '14:30:00'),
+(10, 4, '2025-09-06', '15:00:00'),
+(1, 5, '2025-09-06', '16:30:00'),
+(13, 1, '2025-09-07', '08:30:00'),
+(18, 2, '2025-09-08', '09:45:00'),
+(19, 3, '2025-09-08', '10:15:00'),
+(20, 4, '2025-09-09', '11:45:00'),
+(16, 5, '2025-09-10', '13:30:00');
 
 INSERT INTO piezas_dentales (cod_pd) VALUES 
 ('11'),
@@ -231,63 +202,27 @@ INSERT INTO tratamientos (nom_trat, desc_trat) VALUES
 ('Implantes Dentales', 'Sustitución de dientes perdidos.'),
 ('Extracción Dental', 'Extracción de dientes problemáticos.');
 
-INSERT INTO historia_clinica (id_paciente_hc, desc_hc, finalizado, pagado, fecha_fin) VALUES 
-(1, 'Consulta inicial para revisión dental.', TRUE, TRUE, '2025-01-10'),
-(2, 'Tratamiento de ortodoncia recomendado.', FALSE, FALSE, NULL),
-(3, 'Extracción de muela de juicio realizada.', TRUE, TRUE, '2025-02-15'),
-(4, 'Control de caries y limpiezas.', TRUE, TRUE, '2025-03-20'),
-(5, 'Impresiones para prótesis dentales.', FALSE, FALSE, NULL),
-(1, 'Seguimiento del tratamiento de ortodoncia.', TRUE, TRUE, '2025-04-25'),
-(2, 'Tratamiento de conducto necesario.', FALSE, FALSE, NULL),
-(6, 'Diagnóstico de bruxismo.', TRUE, TRUE, '2025-05-30'),
-(7, 'Consulta para blanqueamiento dental.', TRUE, FALSE, NULL),
-(8, 'Revisión anual de salud dental.', TRUE, TRUE, '2025-06-10'),
-(3, 'Control de endodoncia realizada.', TRUE, TRUE, '2025-07-15'),
-(4, 'Limpieza profunda y recomendación de flúor.', TRUE, TRUE, '2025-08-20'),
-(5, 'Tratamiento temporal de emergencias dentales.', TRUE, TRUE, '2025-09-25'),
-(9, 'Planificación de implantes dentales.', FALSE, FALSE, NULL),
-(10, 'Consulta por dolor agudo en muela.', TRUE, TRUE, '2025-10-10'),
-(2, 'Seguimiento de tratamiento de conducto.', FALSE, FALSE, NULL),
-(11, 'Evaluación de tratamiento periodontal.', TRUE, TRUE, '2025-11-15'),
-(12, 'Control post-tratamiento de endodoncia.', TRUE, TRUE, '2025-12-20'),
-(1, 'Consulta de control anual.estado de salud.', TRUE, TRUE, '2025-01-30'),
-(13, 'Diagnóstico avanzado de enfermedad periodontal.', TRUE, TRUE, '2025-02-10'),
-(14, 'Extracción programada de muela de juicio.', FALSE, FALSE, NULL),
-(8, 'Consulta post-tratamiento de ortodoncia.', TRUE, TRUE, '2025-03-05'),
-(15, 'Chequeo después de blanqueamiento dental.', TRUE, FALSE, NULL),
-(3, 'Revisión anual de estado bucal.', TRUE, TRUE, '2025-04-20'),
-(11, 'Tratamiento de caries múltiple.', TRUE, TRUE, '2025-05-15'),
-(12, 'Evaluación general y recomendaciones.', TRUE, TRUE, '2025-06-15'),
-(2, 'Control y seguimiento del dolor.', TRUE, TRUE, '2025-07-20'),
-(5, 'Consulta para extracción dental.', TRUE, TRUE, '2025-08-25'),
-(9, 'Tratamiento de ortodoncia seguimiento.', TRUE, TRUE, '2025-09-30'),
-(10, 'Control de tratamiento de conducto.',  FALSE, FALSE, NULL),
-(6, 'Consulta de control de piezas dentales.', TRUE, TRUE, '2025-10-05'),
-(14, 'Revisión de encías y salud dental.', TRUE, TRUE, '2025-11-10'),
-(1, 'Chequeo de rutina y limpieza dental.', TRUE, FALSE, NULL),
-(15, 'Limpieza dental programada.', TRUE, TRUE, '2025-12-25'),
-(8, 'Control dental y recomendaciones.', TRUE, TRUE, '2025-01-05'),
-(4, 'Consulta de control de ortodoncia.', TRUE, TRUE, '2025-02-15'),
-(3, 'Seguimiento de tratamiento de caries.', TRUE, TRUE, '2025-03-25'),
-(12, 'Consulta dental regular.', TRUE, FALSE, NULL),
-(2, 'Diagnóstico de caries y tratamiento.', TRUE, TRUE, '2025-04-10'),
-(7, 'Evaluación de piezas dentales.', TRUE, TRUE, '2025-05-20'),
-(8, 'Control general y Limpieza dental.', TRUE, FALSE, NULL),
-(1, 'Consulta de control y diagnóstico del tratamiento.', TRUE, TRUE, '2025-06-15'),
-(14, 'Tratamiento de encías necesario.', FALSE, FALSE, NULL),
-(15, 'Chequeo bucales y tratamiento.', TRUE, TRUE, '2025-07-20'),
-(9, 'Consulta para dolor en muela.', TRUE, TRUE, '2025-08-25'),
-(11, 'Tratamiento control de encías.', TRUE, TRUE, '2025-09-10'),
-(13, 'Seguimiento de salud dental.', TRUE, TRUE, '2025-10-15'),
-(5, 'Control de salud dental regular.', TRUE, FALSE, NULL),
-(6, 'Consulta dental seguimientos.', TRUE, TRUE, '2025-11-20'),
-(3, 'Consulta de diagnóstico preliminar.', TRUE, TRUE, '2025-12-25'),
-(10, 'Evaluación sistemática y recomendaciones.', TRUE, TRUE, '2025-01-30'),
-(12, 'Consulta de revisión de tratamientos previos.', TRUE, FALSE, NULL),
-(4, 'Seguimiento de tratamiento en curso.', TRUE, TRUE, '2025-02-10'),
-(7, 'Diagnóstico de placa y control.', TRUE, TRUE, '2025-03-15'),
-(12, 'Consulta por molestias dentales.', TRUE, TRUE, '2025-04-20'),
-(1, 'Chequeo de rutina y limpieza dental.', TRUE, FALSE, NULL);
+INSERT INTO historia_clinica (id_paciente_hc, id_odon_hc, desc_hc, fecha_fin) VALUES
+(1, 1, 'Control inicial y limpieza', '2025-07-15'),
+(2, 2, NULL, NULL),
+(3, 3, 'Extracción de muela del juicio', '2025-08-01'),
+(4, 4, NULL, NULL),
+(5, 5, 'Tratamiento de caries en molar inferior', NULL),
+(6, 1, 'Seguimiento de ortodoncia', NULL),
+(7, 2, NULL, NULL),
+(8, 3, 'Evaluación para prótesis dental', '2025-06-30'),
+(9, 4, NULL, NULL),
+(10, 5, 'Blanqueamiento dental', NULL),
+(11, 1, NULL, NULL),
+(12, 2, 'Colocación de resina en incisivo', '2025-07-20'),
+(13, 3, NULL, NULL),
+(14, 4, 'Limpieza semestral', NULL),
+(15, 5, NULL, NULL),
+(16, 1, 'Tratamiento de encías', '2025-08-10'),
+(17, 2, NULL, NULL),
+(18, 3, NULL, NULL),
+(19, 4, 'Revisión post-operatoria', '2025-07-01'),
+(20, 5, NULL, NULL);
 
 INSERT INTO trat_pd_cd (id_trat, id_cd, id_pd, id_hc) VALUES 
 (1, 1, 1, 1),
@@ -387,8 +322,5 @@ INSERT INTO pagos (id_cuota, id_entrega, id_hc, pagado, fecha_limite, fecha_pago
 (4, 2, 8, FALSE, '2025-01-10', NULL),
 (1, 1, 9, TRUE, '2025-02-15', '2025-01-31'),
 (2, 2, 10, FALSE, '2025-03-10', NULL);
-
-
-SELECT * FROM pagos;
 
 
