@@ -120,12 +120,18 @@ id_odon INT NOT NULL,
 id_esp INT NOT NULL,
 CONSTRAINT pk_odonxesp PRIMARY KEY(id_odonxesp));
 
+CREATE TABLE estados_turnos (
+id_est INT AUTO_INCREMENT,
+nombre_est VARCHAR(30) NOT NULL,
+CONSTRAINT pk_est PRIMARY KEY(id_est));
+
 CREATE TABLE turnos (
 id_turno INT AUTO_INCREMENT,
 id_pac INT,
 id_odon INT NOT NULL,
 fecha_turno DATE NOT NULL,
 hora_turno TIME NOT NULL,
+estado_turno INT NOT NULL,
 CONSTRAINT pk_turno PRIMARY KEY(id_turno));
 
 CREATE TABLE piezas_dentales (
@@ -227,6 +233,10 @@ ALTER TABLE odon_esp
 ADD CONSTRAINT fk_esp
 FOREIGN KEY (id_esp) REFERENCES especialidades(id_esp)
 ON UPDATE CASCADE;
+
+ALTER TABLE turnos 
+ADD CONSTRAINT fk_est
+FOREIGN KEY (estado_turno) REFERENCES estados_turnos(id_est);
 
 ALTER TABLE historia_clinica
 ADD CONSTRAINT fk_paciente

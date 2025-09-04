@@ -323,4 +323,21 @@ INSERT INTO pagos (id_cuota, id_entrega, id_hc, pagado, fecha_limite, fecha_pago
 (1, 1, 9, TRUE, '2025-02-15', '2025-01-31'),
 (2, 2, 10, FALSE, '2025-03-10', NULL);
 
+select * from pacientes;
+select * from personal;
+select * from historia_clinica;
+select * from trat_pd_cd;
+select * from tratamientos;
+select * from historia_clinica where id_paciente_hc = 14;
+select nom_pac as nombre, ape_pac as apellido, nom_trat, cod_pd, nomb_cara from pacientes 
+inner join historia_clinica hc on id_pac = id_paciente_hc
+inner join trat_pd_cd tpc on hc.id_hc = tpc.id_hc
+inner join tratamientos trat on trat.id_trat = tpc.id_trat
+inner join piezas_dentales on id_pieza = tpc.id_pd
+inner join caras_dentales on id_cara = tpc.id_cd
+where (nom_pac = "Laura" and ape_pac = "Peralta") or dni_pac = '33444555';
+
+'14', 'Laura', 'Peralta', '33444555', '1993-07-09', 'Chacabuco 700', '3875456456', 'laura.peralta@email.com', '1'
+
+
 
