@@ -159,13 +159,13 @@ fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 fecha_fin DATE,
 CONSTRAINT pk_hc PRIMARY KEY(id_hc));
 
-CREATE TABLE trat_pd_cd (
-id_trat_pd_cd INT AUTO_INCREMENT,
+CREATE TABLE detalles_hist_cli (
+id_dethc INT AUTO_INCREMENT,
 id_trat INT NOT NULL,
 id_cd INT NOT NULL,
 id_pd INT NOT NULL,
 id_hc INT NOT NULL,
-CONSTRAINT pk_trat_pd_cd PRIMARY KEY(id_trat_pd_cd));
+CONSTRAINT pk_dethc PRIMARY KEY(id_dethc));
 
 CREATE TABLE entregas (
 id_entrega INT AUTO_INCREMENT,
@@ -248,22 +248,22 @@ ADD CONSTRAINT fk_odon_hc
 FOREIGN KEY (id_odon_hc) REFERENCES personal(id_pers)
 ON UPDATE CASCADE;
 
-ALTER TABLE trat_pd_cd
+ALTER TABLE detalles_hist_cli
 ADD CONSTRAINT fk_trat
 FOREIGN KEY (id_trat) REFERENCES tratamientos(id_trat)
 ON UPDATE CASCADE;
 
-ALTER TABLE trat_pd_cd
+ALTER TABLE detalles_hist_cli
 ADD CONSTRAINT fk_cd
 FOREIGN KEY (id_cd) REFERENCES caras_dentales(id_cara)
 ON UPDATE CASCADE;
 
-ALTER TABLE trat_pd_cd
+ALTER TABLE detalles_hist_cli
 ADD CONSTRAINT fk_pd
 FOREIGN KEY (id_pd) REFERENCES piezas_dentales(id_pieza)
 ON UPDATE CASCADE;
 
-ALTER TABLE trat_pd_cd
+ALTER TABLE detalles_hist_cli
 ADD CONSTRAINT fk_hc
 FOREIGN KEY (id_hc) REFERENCES historia_clinica(id_hc)
 ON DELETE CASCADE

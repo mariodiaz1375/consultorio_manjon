@@ -13,15 +13,21 @@ INSERT INTO obras_sociales (nombre_os) VALUES
 ('PAMI'),
 ('Galeno');
 
+INSERT INTO estados_turnos (nombre_est) VALUES
+('Ocupado'),
+('Finalizado'),
+('Cancelado'),
+('Disponible');
+
 INSERT INTO pacientes (nom_pac, ape_pac, dni_pac, fec_nac_pac, dom_pac, tel_pac, email_pac) VALUES
 ('Marcelo', 'García', '25111222', '1970-03-10', 'España 800', '3874112233', 'marcelo.garcia@email.com'),
 ('Verónica', 'Paz', '30222333', '1982-07-25', 'Caseros 150', '3875223344', 'veronica.paz@email.com'),
 ('Esteban', 'Castro', '28333444', '1975-01-15', 'Balcarce 300', '3874334455', 'esteban.castro@email.com'),
-('Carolina', 'Soto', '33444555', '1990-09-01', 'Alvarado 650', '3875445566', 'carolina.soto@email.com'),
+('Carolina', 'Soto', '33424555', '1990-09-01', 'Alvarado 650', '3875445566', 'carolina.soto@email.com'),
 ('Fernando', 'Acosta', '27555666', '1980-04-20', 'Dean Funes 400', '3874556677', 'fernando.acosta@email.com'),
 ('Romina', 'Quiroga', '31666777', '1988-11-12', 'San Martín 920', '3875667788', 'romina.quiroga@email.com'),
 ('Sergio', 'Herrera', '29777888', '1972-06-05', 'Mitre 250', '3874778899', 'sergio.herrera@email.com'),
-('Julieta', 'Luna', '34888999', '1995-02-28', 'Rivadavia 710', '3875889900', 'julieta.luna@email.com'),
+('Julieta', 'Luna', '34858999', '1995-02-28', 'Rivadavia 710', '3875889900', 'julieta.luna@email.com'),
 ('Alejandro', 'Ramos', '26999000', '1977-08-18', 'Urquiza 110', '3874990011', 'alejandro.ramos@email.com'),
 ('Soledad', 'Ortiz', '32000111', '1991-05-03', 'Pueyrredón 530', '3875001122', 'soledad.ortiz@email.com'),
 ('Roberto', 'Benítez', '24111222', '1965-10-07', 'San Juan 200', '3874123123', 'roberto.benitez@email.com'),
@@ -154,27 +160,27 @@ INSERT INTO odon_esp (id_odon, id_esp) VALUES
 (4, 5),
 (5, 6);
 
-INSERT INTO turnos (id_pac, id_odon, fecha_turno, hora_turno) VALUES
-(3, 1, '2025-08-25', '09:00:00'),
-(7, 2, '2025-08-26', '10:30:00'),
-(5, 3, '2025-08-27', '11:00:00'),
-(12, 4, '2025-08-28', '14:00:00'),
-(8, 5, '2025-08-29', '15:30:00'),
-(14, 1, '2025-08-30', '09:30:00'),
-(2, 2, '2025-09-01', '08:00:00'),
-(9, 3, '2025-09-01', '16:00:00'),
-(11, 4, '2025-09-02', '12:30:00'),
-(4, 5, '2025-09-03', '13:00:00'),
-(15, 1, '2025-09-03', '10:00:00'),
-(6, 2, '2025-09-04', '11:30:00'),
-(17, 3, '2025-09-05', '14:30:00'),
-(10, 4, '2025-09-06', '15:00:00'),
-(1, 5, '2025-09-06', '16:30:00'),
-(13, 1, '2025-09-07', '08:30:00'),
-(18, 2, '2025-09-08', '09:45:00'),
-(19, 3, '2025-09-08', '10:15:00'),
-(20, 4, '2025-09-09', '11:45:00'),
-(16, 5, '2025-09-10', '13:30:00');
+INSERT INTO turnos (id_pac, id_odon, fecha_turno, hora_turno, estado_turno) VALUES
+(3, 1, '2025-08-25', '09:00:00', 1),
+(7, 2, '2025-08-26', '10:30:00', 2),
+(5, 3, '2025-08-27', '11:00:00', 3),
+(NULL, 4, '2025-08-28', '14:00:00', 4),
+(8, 5, '2025-08-29', '15:30:00', 3),
+(14, 1, '2025-08-30', '09:30:00', 2),
+(2, 2, '2025-09-01', '08:00:00', 1),
+(9, 3, '2025-09-01', '16:00:00', 3),
+(11, 4, '2025-09-02', '12:30:00', 2),
+(4, 5, '2025-09-03', '13:00:00', 1),
+(NULL, 1, '2025-09-03', '10:00:00', 4),
+(6, 2, '2025-09-04', '11:30:00', 2),
+(17, 3, '2025-09-05', '14:30:00', 3),
+(10, 4, '2025-09-06', '15:00:00', 1),
+(1, 5, '2025-09-06', '16:30:00', 3),
+(13, 1, '2025-09-07', '08:30:00', 2),
+(18, 2, '2025-09-08', '09:45:00', 1),
+(NULL, 3, '2025-09-08', '10:15:00', 4),
+(20, 4, '2025-09-09', '11:45:00', 2),
+(16, 5, '2025-09-10', '13:30:00', 1);
 
 INSERT INTO piezas_dentales (cod_pd) VALUES 
 ('11'),
@@ -224,7 +230,7 @@ INSERT INTO historia_clinica (id_paciente_hc, id_odon_hc, desc_hc, fecha_fin) VA
 (19, 4, 'Revisión post-operatoria', '2025-07-01'),
 (20, 5, NULL, NULL);
 
-INSERT INTO trat_pd_cd (id_trat, id_cd, id_pd, id_hc) VALUES 
+INSERT INTO detalles_hist_cli (id_trat, id_cd, id_pd, id_hc) VALUES 
 (1, 1, 1, 1),
 (2, 2, 2, 1),
 (3, 3, 3, 2),
@@ -323,18 +329,20 @@ INSERT INTO pagos (id_cuota, id_entrega, id_hc, pagado, fecha_limite, fecha_pago
 (1, 1, 9, TRUE, '2025-02-15', '2025-01-31'),
 (2, 2, 10, FALSE, '2025-03-10', NULL);
 
-select * from pacientes;
+select * from pacientes order by (dni_pac);
 select * from personal;
 select * from historia_clinica;
 select * from trat_pd_cd;
 select * from tratamientos;
 select * from historia_clinica where id_paciente_hc = 14;
+
+
 select nom_pac as nombre, ape_pac as apellido, nom_trat, cod_pd, nomb_cara from pacientes 
 inner join historia_clinica hc on id_pac = id_paciente_hc
-inner join trat_pd_cd tpc on hc.id_hc = tpc.id_hc
-inner join tratamientos trat on trat.id_trat = tpc.id_trat
-inner join piezas_dentales on id_pieza = tpc.id_pd
-inner join caras_dentales on id_cara = tpc.id_cd
+inner join detalles_hist_cli dhc on hc.id_hc = dhc.id_hc
+inner join tratamientos trat on trat.id_trat = dhc.id_trat
+inner join piezas_dentales on id_pieza = dhc.id_pd
+inner join caras_dentales on id_cara = dhc.id_cd
 where (nom_pac = "Laura" and ape_pac = "Peralta") or dni_pac = '33444555';
 
 '14', 'Laura', 'Peralta', '33444555', '1993-07-09', 'Chacabuco 700', '3875456456', 'laura.peralta@email.com', '1'
